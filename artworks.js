@@ -17,6 +17,7 @@ const ARTWORKS = [
   { file: "ambedkar.webp",      title: "Dr. B.R. Ambedkar",     medium: "ballpoint",       category: "portrait" },
   { file: "krishna.webp",       title: "Krishna",               medium: "ink & wash",      category: "myth"    },
   { file: "anime-profile.webp", title: "Side Profile",          medium: "fineliner",       category: "pop"     },
+    { file: "animie.webp", title: "Zulinger",          medium: "fineliner",       category: "pop"     },
   { file: "tagore.webp",        title: "Rabindranath Tagore",   medium: "ballpoint",       category: "portrait" },
   { file: "buddha.webp",        title: "Little Buddha",         medium: "ink & marker",    category: "myth"    },
   { file: "turban-man.webp",    title: "Swami Vivekananda",     medium: "fineliner",       category: "portrait" },
@@ -24,6 +25,7 @@ const ARTWORKS = [
   { file: "cute.webp",        title: "cute_thakur",               medium: "water-color",  category: "portrait" },
   { file: "lion.webp",        title: "The King",               medium: "pencil-color",  category: "portrait" },
   { file: "elephant-boy.webp",  title: "The Gentle Giant",      medium: "ink wash",        category: "portrait" }
+   
 
 
   // 👇 example — copy this, edit it, and drop it above this line
