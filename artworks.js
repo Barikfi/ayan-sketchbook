@@ -13,7 +13,7 @@
 const ARTWORKS = [
   { file: "hanuman.webp",       title: "Hanuman",               medium: "ink & gel pen",   category: "myth",   },
   { file: "artist.webp",       hero: true },
-  { file: "luffy.webp",         title: "Jai Bajrangbali",       medium: "acryllic",         category: "pop"     },
+  { file: "luffy.webp",         title: "Jai Bajrangbali",       medium: "acryllic",         category: "myth"     },
   { file: "ambedkar.webp",      title: "Dr. B.R. Ambedkar",     medium: "ballpoint",       category: "portrait" },
   { file: "krishna.webp",       title: "Krishna",               medium: "ink & wash",      category: "myth"    },
   { file: "anime-profile.webp", title: "Side Profile",          medium: "fineliner",       category: "pop"     },
