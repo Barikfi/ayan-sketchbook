@@ -78,6 +78,38 @@
   /* ---------- Grain vignette on hero ---------- */
   ::selection{background:var(--vermillion); color:var(--paper);}
 
+  /* ---------- Sound toggle (background music) ---------- */
+  .sound-toggle{
+    position:fixed; right:5vw; bottom:2rem; z-index:600;
+    width:52px; height:52px; border-radius:50%;
+    background:var(--ink); border:1px solid rgba(238,230,211,.25);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:0 10px 24px rgba(28,23,18,.3);
+    transition:transform .3s ease, background .3s ease;
+  }
+  .sound-toggle:hover{transform:translateY(-3px); background:var(--vermillion);}
+  .sound-bars{display:flex; align-items:flex-end; gap:3px; height:16px;}
+  .sound-bars span{
+    width:3px; background:var(--paper); border-radius:2px;
+    height:6px; transition:height .2s ease, background .2s ease;
+  }
+  /* Playing state: bars animate like a little equalizer */
+  .sound-toggle.playing .sound-bars span{animation:eq 0.9s ease-in-out infinite;}
+  .sound-toggle.playing .sound-bars span:nth-child(1){animation-delay:-0.6s;}
+  .sound-toggle.playing .sound-bars span:nth-child(2){animation-delay:-0.3s;}
+  .sound-toggle.playing .sound-bars span:nth-child(3){animation-delay:0s;}
+  @keyframes eq{
+    0%,100%{height:5px;}
+    50%{height:15px;}
+  }
+  /* Muted state: bars sit flat and dim so the icon reads as "off" */
+  .sound-toggle:not(.playing) .sound-bars span{height:4px; background:rgba(238,230,211,.4);}
+  .sound-toggle:not(.playing) .sound-bars span:nth-child(2){height:8px;}
+
+  @media(max-width:700px){
+    .sound-toggle{right:5vw; bottom:1.4rem; width:46px; height:46px;}
+  }
+
   /* ---------- NAV ---------- */
   header{
     position:fixed;top:0;left:0;width:100%;z-index:500;
@@ -466,6 +498,12 @@
 
 <div class="nib" id="nib"></div>
 
+<!-- Background music: drop your track in assets/music.mp3 (mp3) — add an .ogg alongside it for wider browser support if you like -->
+<audio id="bgMusic" src="assets/music.mp3" loop preload="auto"></audio>
+<button class="sound-toggle" id="soundToggle" aria-label="Toggle background music" aria-pressed="false">
+  <span class="sound-bars"><span></span><span></span><span></span></span>
+</button>
+
 <header id="siteHeader">
   <div class="brand"><span class="dot"></span> Ayan <span class="script" style="font-size:1.1rem;">/ studio</span></div>
   <button class="nav-toggle" id="navToggle">☰</button>
@@ -645,7 +683,7 @@
 </section>
 
 <footer>
-  <span>© <span id="year"></span> Website created by Satwik Barik..All drawings hand-made.</span>
+  <span>© <span id="year"></span> Ayan — Ink &amp; Line Studio. All drawings hand-made.</span>
   <span class="to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top ↑</span>
 </footer>
 
@@ -664,6 +702,45 @@
   // Loader
   window.addEventListener('load', () => {
     setTimeout(() => document.getElementById('loader').classList.add('hide'), 900);
+  });
+
+  // ---------- Background music ----------
+  // Browsers block autoplay-with-sound until the visitor has interacted with
+  // the page, so: try to play immediately (muted browsers may allow it),
+  // and if that's blocked, start on the very first tap/click/scroll instead.
+  // Once running, volume is set to full (1.0) as requested.
+  const bgMusic = document.getElementById('bgMusic');
+  const soundToggle = document.getElementById('soundToggle');
+  bgMusic.volume = 1.0;
+  let musicStarted = false;
+
+  function startMusic(){
+    if (musicStarted) return;
+    bgMusic.play().then(() => {
+      musicStarted = true;
+      soundToggle.classList.add('playing');
+      soundToggle.setAttribute('aria-pressed', 'true');
+    }).catch(() => {
+      // Autoplay blocked — wait for the first user interaction instead.
+    });
+  }
+
+  startMusic();
+  ['pointerdown', 'keydown', 'scroll'].forEach(evt => {
+    window.addEventListener(evt, startMusic, { once: true, passive: true });
+  });
+
+  soundToggle.addEventListener('click', () => {
+    if (bgMusic.paused){
+      bgMusic.play();
+      musicStarted = true;
+      soundToggle.classList.add('playing');
+      soundToggle.setAttribute('aria-pressed', 'true');
+    } else {
+      bgMusic.pause();
+      soundToggle.classList.remove('playing');
+      soundToggle.setAttribute('aria-pressed', 'false');
+    }
   });
 
   // Custom cursor
