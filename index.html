@@ -361,6 +361,98 @@
   .to-top{cursor:pointer; display:flex; align-items:center; gap:6px; transition:color .3s ease;}
   .to-top:hover{color:var(--vermillion);}
 
+  /* =========================================================
+     MOBILE REDESIGN — tuned for handset viewing (≤700px)
+     ========================================================= */
+  @media(max-width:700px){
+
+    /* -- global rhythm: everything gets tighter, touch-first -- */
+    .wrap{padding:0 6vw;}
+    .btn{padding:1rem 1.4rem; font-size:.8rem; width:100%; justify-content:center;}
+    .nav-toggle{
+      padding:.5rem; margin:-.5rem; min-width:44px; min-height:44px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    header{padding:16px 6vw;}
+    header.scrolled{padding:12px 6vw;}
+    .brand{font-size:1.15rem;}
+
+    nav ul{width:82%;}
+
+    /* -- HERO: stack art above text, drop the split-grid -- */
+    .hero{
+      display:flex; flex-direction:column-reverse;
+      min-height:unset; padding:5.5rem 6vw 3rem;
+      gap:2rem;
+    }
+    .hero-text{padding-top:0;}
+    .hero-text h1{font-size:clamp(2.4rem,11vw,3.4rem);}
+    .hero-text .sub{font-size:1rem; max-width:none;}
+    .hero-cta{flex-direction:column; gap:.8rem; width:100%;}
+    .hero-cta .btn{width:100%;}
+    .hero-art{margin:0 auto;}
+    .hero-frame{width:min(280px,62vw); animation-duration:7s;}
+    .ink-blot{display:none;} /* decorative blobs crowd small screens */
+    .scroll-cue{display:none;} /* redundant once hero no longer needs a scroll prompt */
+
+    /* -- MARQUEE: smaller type, faster loop feels intentional not sluggish -- */
+    .marquee span{font-size:1.05rem; padding:0 1.5rem;}
+
+    /* -- SECTION HEADS -- */
+    .section-head{margin-bottom:2.2rem; flex-direction:column; align-items:flex-start; gap:.8rem;}
+    .section-head p{max-width:none;}
+    .section-head h2{font-size:clamp(1.9rem,8vw,2.6rem);}
+
+    /* -- ABOUT: stack, photo first, tighten stat row -- */
+    .about{padding:4rem 0 3.5rem;}
+    .about-grid{grid-template-columns:1fr; gap:2.4rem;}
+    .about-photo .page{transform:rotate(-1.5deg); max-width:260px; margin:0 auto;}
+    .about-copy p{font-size:1rem; line-height:1.75;}
+    .stat-row{gap:1.6rem 2rem;}
+    .stat h3{font-size:2rem;}
+
+    /* -- GALLERY -- */
+    .gallery{padding:3.5rem 0;}
+    .filters{
+      flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+      margin:0 -6vw 2rem; padding:0 6vw 4px; scrollbar-width:none;
+    }
+    .filters::-webkit-scrollbar{display:none;}
+    .filters button{flex:0 0 auto; padding:.6rem 1.1rem;}
+    .grid{gap:1.8rem;}
+    /* flatten the scattered rotation on single-column cards — reads as messy, not handmade, at this width */
+    .card:nth-child(3n+1) .page, .card:nth-child(3n+2) .page, .card:nth-child(3n) .page{transform:rotate(-0.6deg);}
+    .card:hover .page{transform:rotate(0deg) translateY(-4px);}
+
+    .lightbox{padding:8vw 6vw;}
+    .lightbox-close{top:1.2rem; right:1.4rem; min-width:44px; min-height:44px;}
+
+    /* -- PROCESS -- */
+    .process{padding:3.5rem 0;}
+    .steps{gap:1.8rem;}
+
+    /* -- TEACH -- */
+    .teach{padding:4rem 0;}
+    .course-grid{gap:1.4rem;}
+    .course{padding:1.8rem 1.5rem;}
+    .teach-note{margin-top:2.4rem; padding-top:1.8rem;}
+
+    /* -- CONTACT -- */
+    .contact{padding:4.5rem 0 3.5rem;}
+    .contact h2{font-size:clamp(2.1rem,11vw,3rem);}
+    .contact .btn{max-width:340px; margin:0 auto;}
+    .social-row{gap:1.2rem 1.8rem; margin-top:2rem;}
+
+    /* -- FOOTER -- */
+    footer{padding:2rem 6vw; flex-direction:column; text-align:center; gap:.6rem;}
+  }
+
+  @media(max-width:400px){
+    .hero-text h1{font-size:2.05rem;}
+    .stat-row{gap:1.2rem 1.6rem;}
+    .stat h3{font-size:1.7rem;}
+  }
+
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; transition:none !important;}
   }
@@ -543,7 +635,7 @@
     <p class="script" style="color:var(--vermillion); font-size:1.4rem;">Got a face, a character, or a class you want in on?</p>
     <h2>Let's put it<br>on paper.</h2>
     <p class="sub">Commissions, workshop bookings and general questions are all welcome — I read everything myself.</p>
-    <a href="https://wa.me/+91 7363061977" class="btn btn-fill">whatsapp +91 7363061977</a>
+    <a href="https://wa.me/917363061977" class="btn btn-fill">WhatsApp +91 73630 61977</a>
     <div class="social-row">
       <a href="#work">Instagram</a>
       <a href="#work">Behance</a>
